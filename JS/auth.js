@@ -5,7 +5,7 @@ const MAX_ATTEMPTS = 3;
 const LOCK_TIME = 60; // seconds
 
 /* =========================
-   Feedback helper
+   Feedback helper-משוב הצלחה או שגיאה
 ========================= */
 function showFeedback(text, type = "error") {
   const msg = document.getElementById("message");
@@ -17,16 +17,16 @@ function showFeedback(text, type = "error") {
 }
 
 /* =========================
-   REGISTER
+   REGISTER-הרשמה
 ========================= */
 const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
   registerForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+    e.preventDefault();//מינעת רענון
 
-    const username = regUsername.value.trim();
-    const password = regPassword.value.trim();
+    const username = regUsername.value.trim();//מסירה רווחים מיותרים לפני או אחרי הטקסט.
+    const password = regPassword.value.trim();//מסירה רווחים מיותרים לפני או אחרי הטקסט.
 
     if (!username || !password) {
       showFeedback("יש למלא את כל השדות", "warning");
@@ -51,7 +51,7 @@ if (registerForm) {
 }
 
 /* =========================
-   LOGIN
+   LOGIN-התחברות
 ========================= */
 const loginForm = document.getElementById("loginForm");
 
@@ -60,26 +60,26 @@ if (loginForm) {
   const passwordInput = document.getElementById("password");
 
   loginForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+    e.preventDefault();//מינעת רענון דף
 
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
+    const username = usernameInput.value.trim();//מסירה רווחים מיותרים לפני או אחרי הטקסט.
+    const password = passwordInput.value.trim();//מסירה רווחים מיותרים לפני או אחרי הטקסט.
 
-    const lockKey = `lock_${username}`;
-    const attemptsKey = `attempts_${username}`;
-    const now = Date.now();
+    const lockKey = `lock_${username}`;//יצירת מפתח חסימה ייחודי  
+    const attemptsKey = `attempts_${username}`;// יצירתהמונה ניסיונות
+    const now = Date.now();//כדי לדעת אם המשתמש חסום
 
-    const lockUntil = Number(localStorage.getItem(lockKey));
+    const lockUntil = Number(localStorage.getItem(lockKey));//חסום עד 
 
-    /* 🔓 if lock expired – reset attempts */
-    if (lockUntil && now >= lockUntil) {
+    /* if lock expired – reset attempts */
+    if (lockUntil && now >= lockUntil) {//אם עברו 60 שניות אנחנו מנקים את ה-LocalStorage מהמפתחות של החסימה והניסיונות 
       localStorage.removeItem(lockKey);
       localStorage.removeItem(attemptsKey);
     }
 
-    /* 🔒 still locked */
-    if (lockUntil && now < lockUntil) {
-      startCountdown(Math.ceil((lockUntil - now) / 1000));
+    /*  still locked */
+    if (lockUntil && now < lockUntil) {//אם זה עדיין חסום
+      startCountdown(Math.ceil((lockUntil - now) / 1000));//כמה זמן נותר 
       return;
     }
 
@@ -88,17 +88,17 @@ if (loginForm) {
       u => u.username === username && u.password === password
     );
 
-    /* ❌ wrong login */
-    if (!user) {
-      let attempts = Number(localStorage.getItem(attemptsKey)) || 0;
+    /*  wrong login */
+    if (!user) {//אם הפרטים לא נכונים
+      let attempts = Number(localStorage.getItem(attemptsKey)) || 0;//כמה פעמים טעה
       attempts++;
-      localStorage.setItem(attemptsKey, attempts);
+      localStorage.setItem(attemptsKey, attempts);//שמירת כמות ניסיונות
 
-      if (attempts >= MAX_ATTEMPTS) {
-        const lockTime = now + LOCK_TIME * 1000;
-        localStorage.setItem(lockKey, lockTime);
+      if (attempts >= MAX_ATTEMPTS) {//אם זה גדול מסף הניסיונות המותר
+        const lockTime = now + LOCK_TIME * 1000;//חישוב זמן  חסימה
+        localStorage.setItem(lockKey, lockTime);שמירה
         showFeedback("נחסמת ל־60 שניות 🔒", "error");
-        startCountdown(LOCK_TIME);
+        startCountdown(LOCK_TIME);//שעון לאחור
       } else {
         showFeedback(`שגיאה (${attempts}/${MAX_ATTEMPTS})`, "error");
       }
@@ -109,7 +109,7 @@ if (loginForm) {
     localStorage.removeItem(attemptsKey);
     localStorage.removeItem(lockKey);
 
-    setCurrentUser(username);
+    setCurrentUser(username);//מי נמצא עכשיו באתר- שמירה
     showFeedback("התחברת בהצלחה! 🎉", "success");
 
     setTimeout(() => {
@@ -133,8 +133,8 @@ function startCountdown(seconds) {
     remaining--;
 
     if (remaining < 0) {
-      clearInterval(interval);
-      msg.style.display = "none";
+      clearInterval(interval);// עוצר את הריצה של השעון
+      msg.style.display = "none";//מעלים את ההודעה מהמסך
     }
   }, 1000);
 }
