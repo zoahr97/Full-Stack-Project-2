@@ -1,30 +1,66 @@
 <!DOCTYPE html>
-<html lang="he">
+<!--
+  File: register.html
+  Purpose: User registration screen.
+  Description:
+  - Provides a form for creating a new user account.
+  - Collects username and password from the user.
+  - Registration logic, validation and storage are handled in auth.js.
+-->
+
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Page title -->
   <title>Register</title>
+
+  <!-- Shared styles for login and registration pages -->
   <link rel="stylesheet" href="../CSS/login.css">
 </head>
+
 <body>
 
-<div class="container">
-  <h2>הרשמה</h2>
+  <!-- ===== REGISTER CONTAINER ===== -->
+  <!-- Centered neon-styled registration panel -->
+  <div class="container">
 
-  <form id="registerForm">
-    <input type="text" id="regUsername" placeholder="שם משתמש" required>
-    <input type="password" id="regPassword" placeholder="סיסמה" required>
-    <button type="submit">צור משתמש</button>
-  </form>
+    <!-- Page heading -->
+    <h2>Create Account</h2>
 
-  <p id="message"></p>
+    <!-- Subtitle / short instruction -->
+    <p class="subtitle">Join the Game Hub</p>
 
-  <p>
-    כבר רשומה?
-    <a href="index.html">חזרה להתחברות</a>
-  </p>
-</div>
+    <!-- ===== REGISTRATION FORM ===== -->
+    <!-- Handles new user account creation -->
+    <form id="registerForm">
 
-<script src="../JS/storage.js"></script>
-<script src="../JS/auth.js"></script>
+      <!-- Username input -->
+      <input type="text" id="regUsername" placeholder="Username" required>
+
+      <!-- Password input -->
+      <input type="password" id="regPassword" placeholder="Password" required>
+
+      <!-- Submit button -->
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- Feedback message (success / error / warning) -->
+    <p id="message" class="feedback"></p>
+
+    <!-- Navigation back to login page -->
+    <p>
+      Already have an account?
+      <a href="index.html">Back to login</a>
+    </p>
+
+  </div>
+
+  <!-- Shared local storage utilities -->
+  <script src="../JS/storage.js"></script>
+
+  <!-- Authentication logic (registration handling and validation) -->
+  <script src="../JS/auth.js"></script>
+
 </body>
 </html>

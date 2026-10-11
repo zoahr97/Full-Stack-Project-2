@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+  File: catch.html
+  Purpose: "Falling Objects" game screen.
+  Description:
+  - Provides the HTML structure for the Falling Objects game.
+  - Displays HUD information, controls, instructions and the playfield.
+  - Game logic and state handling are implemented in catch.js.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Responsive layout support -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Falling Objects</title>
+
+  <!-- Styles specific to the Falling Objects game -->
+  <link rel="stylesheet" href="\CSS\catch.css" />
+</head>
+
+<body>
+
+  <!-- Top decorative HUD line -->
+  <div class="hud-line top"></div>
+
+  <!-- Page header with back navigation and title -->
+  <header class="page-header">
+    <a class="back-link" href="apps.html">← BACK</a>
+    <h1 class="title">FALLING OBJECTS</h1>
+  </header>
+
+  <!-- Main game layout -->
+  <main class="layout single">
+    <section class="game-area">
+
+      <!-- ===== HUD ===== -->
+      <!-- Displays current game status -->
+      <div class="hud">
+
+        <!-- Difficulty level -->
+        <div class="hud-box pink">
+          <span class="label">LEVEL</span>
+          <span class="value" id="levelLabel">EASY</span>
+        </div>
+
+        <!-- Remaining time -->
+        <div class="hud-box cyan">
+          <span class="label">TIME</span>
+          <span class="value"><span id="time">60</span>s</span>
+        </div>
+
+        <!-- Current score -->
+        <div class="hud-box green">
+          <span class="label">SCORE</span>
+          <span class="value" id="score">0</span>
+        </div>
+
+        <!-- Remaining lives -->
+        <div class="hud-box yellow">
+          <span class="label">LIVES</span>
+          <span class="value" id="lives">5</span>
+        </div>
+
+      </div>
+
+      <!-- ===== CONTROLS ===== -->
+      <!-- Difficulty selection and start button -->
+      <div class="controls">
+
+        <!-- Difficulty selector -->
+        <div class="select-wrap">
+          <label class="select-label" for="difficulty">DIFFICULTY</label>
+          <select id="difficulty" class="select">
+            <option value="easy">EASY</option>
+            <option value="medium">MEDIUM</option>
+            <option value="hard">HARD</option>
+          </select>
+        </div>
+
+        <!-- Start game button -->
+        <button id="startBtn" class="start-btn">START GAME</button>
+      </div>
+
+      <!-- ===== MESSAGE ===== -->
+      <!-- Player instructions and game hints -->
+      <div class="message" id="message">
+        Use ← → keys to move. Catch the glowing drops!
+      </div>
+
+      <!-- ===== GAME SCREEN ===== -->
+      <!-- Main playfield where the game runs -->
+      <div id="playfield" class="playfield" aria-label="game area">
+
+        <!-- Player element controlled by keyboard -->
+        <div id="player" class="player" aria-label="player"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Bottom decorative HUD line -->
+  <div class="hud-line bottom"></div>
+
+  <!-- Shared local storage utilities -->
+  <script src="/JS/storage.js"></script>
+
+  <!-- Falling Objects game logic -->
+  <script src="/JS/catch.js"></script>
+</body>
+</html>

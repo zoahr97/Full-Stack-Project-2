@@ -1,30 +1,66 @@
 <!DOCTYPE html>
-<html lang="he">
+<!--
+  File: login.html
+  Purpose: User login screen.
+  Description:
+  - Provides a login form for existing users.
+  - Collects username and password credentials.
+  - Authentication logic and validation are handled in auth.js.
+-->
+
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Page title -->
   <title>Login</title>
-  <link rel="stylesheet" href="../CSS/login.css">
+
+  <!-- Shared styles for login and register pages -->
+  <link rel="stylesheet" href="/CSS/login.css">
 </head>
+
 <body>
 
-<div class="container">
-  <h2>התחברות</h2>
+  <!-- ===== LOGIN CONTAINER ===== -->
+  <!-- Centered neon-styled login panel -->
+  <div class="container">
 
-  <form id="loginForm">
-    <input type="text" id="username" placeholder="שם משתמש" required>
-    <input type="password" id="password" placeholder="סיסמה" required>
-    <button type="submit">התחבר</button>
-  </form>
-<p id="message" class="feedback"></p>
+    <!-- Page heading -->
+    <h2>Welcome Back </h2>
 
+    <!-- Subtitle / short instruction -->
+    <p class="subtitle">Log in to continue</p>
 
-  <p>
-    משתמש חדש?
-    <a href="register.html">הרשמה</a>
-  </p>
-</div>
+    <!-- ===== LOGIN FORM ===== -->
+    <!-- Handles user credential input -->
+    <form id="loginForm">
 
-<script src="../JS/storage.js"></script>
-<script src="../JS/auth.js"></script>
+      <!-- Username input -->
+      <input type="text" id="username" placeholder="Username" required>
+
+      <!-- Password input -->
+      <input type="password" id="password" placeholder="Password" required>
+
+      <!-- Submit button -->
+      <button type="submit" >Login</button>
+    </form>
+
+    <!-- Feedback message (success / error / warning) -->
+    <p id="message" class="feedback"></p>
+
+    <!-- Navigation to registration page -->
+    <p>
+      New here?
+      <a href="register.html">Create an account</a>
+    </p>
+
+  </div>
+
+  <!-- Shared local storage utilities -->
+  <script src="../JS/storage.js"></script>
+
+  <!-- Authentication logic (login handling, validation, lockout) -->
+  <script src="../JS/auth.js"></script>
+
 </body>
 </html>

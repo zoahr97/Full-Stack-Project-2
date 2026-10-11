@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+  File: memory.html
+  Purpose: "Memory Matrix" game screen.
+  Description:
+  - Provides the HTML structure for the Memory Matrix game.
+  - Displays HUD data, controls, progress bar and the game board.
+  - Game logic, timing and matching behavior are implemented in memory.js.
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Page title -->
+  <title>Memory Matrix</title>
+
+  <!-- Styles specific to the Memory Matrix game -->
+  <link rel="stylesheet" href="\CSS\memory.css" />
+</head>
+
+<body>
+
+  <!-- Top decorative HUD line -->
+  <div class="hud-line top"></div>
+
+  <!-- Page header with back navigation and title -->
+  <header class="page-header">
+    <a class="back-link" href="apps.html">← BACK</a>
+    <h1 class="title">MEMORY MATRIX</h1>
+  </header>
+
+  <!-- ===== GAME ONLY LAYOUT ===== -->
+  <!-- Single-column layout without side panel -->
+  <main class="layout single">
+
+    <section class="game-area">
+
+      <!-- ===== HUD ===== -->
+      <!-- Displays current game status -->
+      <div class="hud">
+
+        <!-- Difficulty level -->
+        <div class="hud-box pink">
+          <span class="label">LEVEL</span>
+          <span class="value" id="levelLabel">EASY</span>
+        </div>
+
+        <!-- Game timer -->
+        <div class="hud-box cyan">
+          <span class="label">TIME</span>
+          <span class="value"><span id="timer">0</span>s</span>
+        </div>
+
+        <!-- Number of moves -->
+        <div class="hud-box green">
+          <span class="label">MOVES</span>
+          <span class="value" id="moves">0</span>
+        </div>
+
+        <!-- Matched pairs progress -->
+        <div class="hud-box yellow">
+          <span class="label">PAIRS</span>
+          <span class="value">
+            <span id="pairs">0</span>/<span id="totalPairs">0</span>
+          </span>
+        </div>
+
+      </div>
+
+      <!-- ===== CONTROLS ===== -->
+      <!-- Difficulty selection and game start -->
+      <div class="controls">
+
+        <!-- Difficulty selector -->
+        <div class="select-wrap">
+          <label class="select-label" for="difficulty">DIFFICULTY</label>
+          <select id="difficulty" class="select">
+            <option value="easy">EASY</option>
+            <option value="medium">MEDIUM</option>
+            <option value="hard">HARD</option>
+          </select>
+        </div>
+
+        <!-- Start game button -->
+        <button id="startBtn" class="start-btn">START GAME</button>
+      </div>
+
+      <!-- ===== PROGRESS ===== -->
+      <!-- Visual progress bar for matched pairs -->
+      <div class="progress-wrap">
+        <div class="progress-title">PROGRESS</div>
+        <div class="progress-rail">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- ===== MESSAGE ===== -->
+      <!-- Game feedback and instructions -->
+      <div id="message" class="message"></div>
+
+      <!-- ===== BOARD ===== -->
+      <!-- Grid container for memory cards -->
+      <div id="board" class="board"></div>
+
+    </section>
+
+  </main>
+
+  <!-- Bottom decorative HUD line -->
+  <div class="hud-line bottom"></div>
+
+  <!-- Shared local storage utilities -->
+  <script src="/JS/storage.js"></script>
+
+  <!-- Memory Matrix game logic -->
+  <script src="\JS\memory.js"></script>
+
+</body>
+</html>

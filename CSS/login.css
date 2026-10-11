@@ -1,93 +1,185 @@
-body {
+/*
+  File: login.css
+  Purpose: Styles for Login and Registration pages.
+  Description:
+  - Defines layout, neon-themed container and form elements.
+  - Used by both login and register screens for visual consistency.
+  - Styling only – no authentication logic is implemented here.
+*/
+
+/* ===== RESET ===== */
+/* Global reset for consistent spacing and box sizing */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BACKGROUND ===== */
+/* Full-screen centered layout with dark neon background */
+body {
+  min-height: 100vh;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  height: 100vh;
+  color: #eaffff;
+
+  background:
+    radial-gradient(circle at top, rgba(26,0,51,0.35) 0%, rgba(2,0,20,0.55) 70%),
+    url("images/back.png") center / cover no-repeat;
+
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
+/* ===== NEON FRAME ===== */
+/* Main container for login/register form */
 .container {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 320px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  text-align: center;
+  position: relative;
+  width: 360px;
+  padding: 34px 30px;
+  background: rgba(10, 10, 30, 0.75);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 25px #00ffff,
+    0 0 60px #ff4fd855;
+
+  border: 2px solid #00ffff;
 }
 
+/* Inner glow effect for container */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid #ff4fd8;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ===== TITLE ===== */
+/* Page main title */
+.container h2 {
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 4px;
+  color: #00ff9c;
+  text-shadow:
+    0 0 10px #00ff9c,
+    0 0 30px #00ff9c;
+}
+
+/* Subtitle text under the title */
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 22px;
+  opacity: 0.8;
+  letter-spacing: 2px;
+}
+
+/* ===== INPUTS ===== */
+/* Text and password input fields */
 input {
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  height: 44px;
+  margin-bottom: 14px;
+  padding: 0 14px;
+
+  background: rgba(0, 0, 0, 0.55);
+  color: #eaffff;
+
+  border: 2px solid #00ffff;
+  outline: none;
+
+  box-shadow:
+    0 0 10px #00ffff55;
+
+  font-size: 14px;
 }
 
+/* Input focus state */
+input:focus {
+  border-color: #ff4fd8;
+  box-shadow:
+    0 0 14px #ff4fd8,
+    0 0 35px #ff4fd855;
+}
+
+/* ===== BUTTON ===== */
+/* Primary action button (login / register) */
 button {
   width: 100%;
-  padding: 10px;
-  background: #667eea;
-  color: white;
+  height: 46px;
+  margin-top: 10px;
+
+  background: #00ff9c;
+  color: black;
+
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+
+  font-weight: bold;
+  letter-spacing: 3px;
+
+  box-shadow:
+    0 0 15px #00ff9c,
+    0 0 40px #00ff9c;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Button hover effect */
 button:hover {
-  background: #556cd6;
+  transform: scale(1.05);
+  box-shadow:
+    0 0 25px #00ff9c,
+    0 0 60px #00ff9c;
 }
 
-/* ===== Feedback Message ===== */
+/* ===== LINKS ===== */
+/* Navigation links (login/register switch) */
+a {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #eaffff;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+a:hover {
+  opacity: 1;
+  text-shadow: 0 0 10px #7ff;
+}
+
+/* ===== FEEDBACK ===== */
+/* Feedback messages for success, error and warning states */
 .feedback {
-  margin-top: 15px;
+  margin-top: 14px;
   padding: 10px;
-  border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
+  text-align: center;
+  letter-spacing: 1px;
   display: none;
-  animation: fadeIn 0.4s ease-in-out;
 }
 
+/* Success message */
 .feedback.success {
-  background-color: #e6fffa;
-  color: #065f46;
-  border: 1px solid #34d399;
+  color: #00ff9c;
+  text-shadow: 0 0 10px #00ff9c;
 }
 
+/* Error message */
 .feedback.error {
-  background-color: #ffe4e6;
-  color: #7f1d1d;
-  border: 1px solid #f87171;
+  color: #ff4fd8;
+  text-shadow: 0 0 10px #ff4fd8;
 }
 
+/* Warning message */
 .feedback.warning {
-  background-color: #fff7ed;
-  color: #7c2d12;
-  border: 1px solid #fb923c;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.game {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-.game button {
-  margin-top: 5px;
-}
-
-hr {
-  margin: 20px 0;
+  color: #ffd66e;
+  text-shadow: 0 0 10px #ffd66e;
 }

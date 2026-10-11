@@ -1,68 +1,294 @@
-body {
+/*
+  File: app.css
+  Purpose: Main styles for the applications hub page.
+  Description:
+  - Defines global layout, neon HUD design, game cards and player info panel.
+  - Responsible for visual consistency across the main games selection screen.
+  - No logic is implemented here – styling only.
+*/
+
+/* ===== RESET ===== */
+/* Global reset to ensure consistent box model and spacing across browsers */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+/* Main page layout and background styling */
+body {
   min-height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url("images/back.png") center / cover no-repeat;
+
+  font-family: Arial, sans-serif;
+  color: white;
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.dashboard {
-  background: white;
-  padding: 30px;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+/* ===== HUD LINES ===== */
+/* Decorative neon separator lines (top and bottom) */
+.hud-line {
+  width: 70%;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #7ff,
+    #f4f,
+    #7ff,
+    transparent
+  );
+  box-shadow: 0 0 15px #7ff;
 }
 
-h1, h2 {
+.hud-line.top { margin-bottom: 30px; }
+.hud-line.bottom { margin-top: 40px; }
+
+/* ===== TITLE ===== */
+/* Main page title */
+.title {
+  font-size: 42px;
+  letter-spacing: 6px;
+  margin-bottom: 50px;
+  color: #eaffff;
+  text-shadow: 0 0 30px #0ff;
+}
+
+/* ===== HUD CONTENT ===== */
+/* Main container holding games and player panel */
+.hud-content {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* ===== GAMES ===== */
+/* Wrapper for all game cards */
+.games {
+  display: flex;
+  gap: 50px;
+}
+
+/* ===== GAME CARD ===== */
+/* Individual game card styling */
+.game-card {
+  position: relative;
+  width: 270px;
+  height: 430px;
+  background: rgba(8, 8, 22, 0.9);
+  padding: 16px;
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== NEON FRAME ===== */
+/* Glowing border frame around each card */
+.frame {
+  position: absolute;
+  inset: 0;
+  border: 2px solid currentColor;
+  box-shadow: 0 0 20px currentColor;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ===== IMAGE ===== */
+/* Game preview image */
+.game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9) drop-shadow(0 0 20px currentColor);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* ===== COLORS ===== */
+/* Color themes per game type */
+.memory { color: #ff4fd8; }
+.falling { color: #00ff9c; }
+
+/* ===== LOCKED ===== */
+/* Disabled (locked) game card state */
+.locked {
+  color: #999;
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: default;
+}
+
+.locked-img {
+  filter: grayscale(100%) brightness(0.5);
+}
+
+.locked-text {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: 3px;
+  font-size: 14px;
+  z-index: 3;
+}
+
+/* ===== HOVER ===== */
+/* Hover effects for interactive game cards */
+.game-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 50px currentColor;
+}
+
+.game-card:hover .game-image {
+  filter: brightness(0.65) drop-shadow(0 0 30px currentColor);
+}
+
+/* ===== PLAYER PANEL ===== */
+/* Side panel displaying current player information */
+.player-panel {
+  position: relative;
+  width: 260px;
+  padding: 30px;
+  background: rgba(8, 20, 12, 0.9);
+  color: #00ff9c;
+}
+
+/* Decorative frame for player panel */
+.panel-frame {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #00ff9c;
+  box-shadow: 0 0 30px #00ff9c;
+}
+
+.player-panel h3 {
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.player-panel p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.trophy {
+  font-size: 42px;
+  margin: 20px 0;
+}
+
+/* ===== HUD PANEL ===== */
+/* Advanced HUD-style panel for player stats */
+.hud-panel {
+  position: relative;
+  width: 280px;
+  padding: 26px;
+  background: radial-gradient(circle at top,
+    rgba(0,255,180,0.12),
+    rgba(0,0,0,0.85));
+  color: #00ff9c;
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* HUD panel glowing frame */
+.hud-frame {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #00ff9c;
+  box-shadow:
+    0 0 25px #00ff9c,
+    inset 0 0 25px rgba(0,255,180,0.25);
+  pointer-events: none;
+}
+
+/* HUD title */
+.hud-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 12px #00ff9c;
+}
+
+/* HUD data rows */
+.hud-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(0,255,180,0.25);
+}
+
+.hud-row:last-of-type {
+  border-bottom: none;
+}
+
+.label {
+  opacity: 0.8;
+}
+
+.value {
+  color: #eaffff;
+}
+
+/* Trophy icon styling */
+.trophy-wrap {
+  text-align: center;
+  font-size: 46px;
+  margin: 18px 0;
+  text-shadow:
+    0 0 10px gold,
+    0 0 30px gold;
+}
+
+/* Achievement box (future extension ready) */
+.achievement-box {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(0,255,180,0.4);
+  background: rgba(0,0,0,0.6);
+  box-shadow: inset 0 0 10px rgba(0,255,180,0.3);
+}
+
+.achievement-title {
+  font-size: 9px;
+  opacity: 0.7;
+  margin-bottom: 6px;
   text-align: center;
 }
 
-.user-info {
-  background: #f9fafb;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.achievement-name {
+  font-size: 11px;
+  text-align: center;
+  color: #ffea00;
+  text-shadow: 0 0 8px #ffea00;
 }
 
-.games {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.game {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  transition: transform 0.2s;
-}
-
-.game:hover {
-  transform: scale(1.02);
-}
-
-.game button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 6px;
-  background: #667eea;
-  color: white;
+/* Logout button */
+.logout-btn {
+  margin-top: 16px;
+  padding: 8px 18px;
+  background: transparent;
+  border: 2px solid #ff5f5f;
+  color: #ff5f5f;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 6px;
 }
 
-.game.disabled {
-  opacity: 0.5;
+.logout-btn:hover {
+  background: #ff5f5f;
+  color: black;
 }
 
-.game.disabled button {
-  background: gray;
-  cursor: not-allowed;
-}
-
-hr {
-  margin: 20px 0;
+.logout-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
 }
